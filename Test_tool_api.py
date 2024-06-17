@@ -1,6 +1,6 @@
 import requests
 import os
-
+ 
 def test_api(endpoint_url, image_path, process_type):
     # 画像を読み込む
     with open(image_path, 'rb') as image_file:
@@ -35,8 +35,9 @@ def test_api(endpoint_url, image_path, process_type):
 
 if __name__ == "__main__":
     # テスト用のエンドポイントURLと画像パス
+    
     endpoint_url = "http://localhost:8000/process_shogi_image/"
-    image_path = "bus.jpg"  # テスト用の画像ファイルパス とりあえずバス
+    image_path = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/-2024-06-10-204745_png.rf.e84dfe7e583aac332bd489ef963b8ffa.jpg'  # テスト用の画像ファイルパス とりあえずバス
 
     # 出力ディレクトリを作成
     if not os.path.exists("output"):
