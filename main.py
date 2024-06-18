@@ -5,10 +5,12 @@ import cshogi
 import pickle
 import xml.etree.ElementTree as ET
 import cv2
-from detct_for_Shogiban_Komadai import get_shogiban_komadai
-from detct_for_pices import get_pieces_from_image
+from detect_for_Shogiban_Komadai import get_shogiban_komadai
+#モジュール名修正
+from detect_for_pices import get_pieces_from_image
 from create_csa_data import create_csa_data
 
+ 
 # ロギングの設定
 logging.basicConfig(level=logging.DEBUG)
 
