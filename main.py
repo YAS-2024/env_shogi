@@ -13,28 +13,34 @@ from create_csa_data import create_csa_data
 logging.basicConfig(level=logging.DEBUG)
 
 # APIテスト用CSAデータ
+# 将棋盤が読み込めなかった場合に返却する。
 test_csa_data = """
 V2.2
 N+sente
 N-gote
-P1-KY-KE-GI-KI-OU-KI-GI-KE-KY
-P2 *  *  *  *  *  *  *  *  * 
-P3-FU-FU-FU-FU-FU-FU-FU-FU-FU
-P4 *  *  *  *  *  *  *  *  * 
-P5 *  *  *  *  *  *  *  *  * 
-P6 *  *  *  *  *  *  *  *  * 
-P7+FU+FU+FU+FU+FU+FU+FU+FU+FU
-P8 *  *  *  *  *  *  *  *  * 
-P9+KY+KE+GI+KI+OU+KI+GI+KE+KY
+P1-FU *  *  *  *  *  *  * -FU
+P2 * -FU *  *  *  *  * -FU * 
+P3 *  * -FU *  *  * -FU *  * 
+P4 *  *  * -FU * -FU *  *  * 
+P5 *  *  *  * +FU *  *  *  * 
+P6 *  *  * +FU * +FU *  *  * 
+P7 *  * +FU *  *  * +FU *  * 
+P8 * +FU *  *  *  *  * +FU  * 
+P9+FU *  *  *  *  *  *  * +FU
 +
-P+00KY00KE00KY00KE
-P-00KY00KE00KY00KE
-P-00AL
 """
 
 def __main(image_array):    
     logging.debug("Entered __main function")
     try:
+        # 画像チャネルを3に変換（必要な場合）
+        if image_array.shape[2] == 4:
+            image_array = cv2.cvtColor(image_array, cv2.COLOR_BGRA2BGR)
+        elif image_array.shape[2] == 1:
+            image_array = cv2.cvtColor(image_array, cv2.COLOR_GRAY2BGR)
+            
+        logging.debug(f"Processed image shape: {image_array.shape}")
+        
         ### 1. yolo 将棋盤、駒台イメージの検出
         detection_results = get_shogiban_komadai(image_array)
         logging.debug(f"Detection results: {detection_results}")
@@ -149,4 +155,4 @@ if __name__ == "__main__":
     test_img_path = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/スクリーンショット 2024-06-16 113533.png'
     img_data = cv2.imread(test_img_path)
     print(create_csa(img_data))
-    print(create_svg(img_data))
+    #print(create_svg(img_data))

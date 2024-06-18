@@ -37,7 +37,13 @@ def predict_pices_class_from_image(image_path):
         transform = pickle.load(f)
     # 保存済みモデルのロード
     model = MobileNetV2Classifier(num_classes=num_classes)
-    model.load_state_dict(torch.load(model_path ))
+    ###cuda無効に対する修正###
+    if torch.cuda.is_available():
+        model.load_state_dict(torch.load(model_path))
+    else:
+        model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    ###ここまで###
+
     model = model.to(device)
     model.eval()
     image = Image.open(image_path).convert("RGB")
@@ -53,7 +59,13 @@ def predict_pices_class_from_image_batch(image_paths):
         transform = pickle.load(f)
     # 保存済みモデルのロード
     model = MobileNetV2Classifier(num_classes=num_classes)
-    model.load_state_dict(torch.load(model_path ))
+    
+    ###cuda無効に対する修正###
+    if torch.cuda.is_available():
+        model.load_state_dict(torch.load(model_path))
+    else:
+        model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    ###ここまで###
     model = model.to(device)
     
     model.eval()
