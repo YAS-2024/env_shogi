@@ -23,6 +23,14 @@ def test_api(endpoint_url, image_path, process_type, output_index):
             with open(output_path, "w") as file:
                 file.write(response_data["csa_data"])
             print(f"CSA data written to {output_path}")
+
+        elif process_type == "next_move":
+            fname=response_data["next_move"]
+            output_path = os.path.join("output/API_test", f"next_move{output_index}" + '_' + fname + ".txt")
+            with open(output_path, "w") as file:
+                file.write(fname)
+            print(f"CSA data written to {output_path}")
+        
         
         elif process_type == "svg":
             output_path = os.path.join("output/API_test", f"svg{output_index}.svg")
@@ -49,5 +57,5 @@ if __name__ == "__main__":
     for idx, image_file in enumerate(image_files, start=1):
         image_path = os.path.join(image_dir, image_file)
         
-        for process_type in ["csa", "svg"]:
+        for process_type in ["csa", "svg","next_move"]:
             test_api(endpoint_url, image_path, process_type, idx)

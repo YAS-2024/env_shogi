@@ -4,7 +4,7 @@ import logging
 from fastapi import FastAPI, File, UploadFile, Form
 from PIL import Image
 from io import BytesIO
-from main import create_csa, create_board_instance, create_svg
+from main import create_csa, create_board_instance, create_svg,create_next_move
 
 # CUDAを無効にする
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -45,6 +45,13 @@ async def process_shogi_image(file: UploadFile = File(...), process_type: str = 
             svg_data = create_svg(image)
             logging.debug("SVG data created successfully")
             return {"svg_data": svg_data}
+
+        elif process_type == "next_move":
+            logging.debug("Processing type: nextmove")
+            next_move = create_next_move(image)
+            logging.debug("next_move data created successfully")
+            return {"next_move": next_move}
+        
         else:
             logging.debug("Processing type: csa")
             csa_data = create_csa(image)

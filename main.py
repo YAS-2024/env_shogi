@@ -9,8 +9,8 @@ from detect_for_Shogiban_Komadai import get_shogiban_komadai
 #モジュール名修正
 from detect_for_pices import get_pieces_from_image
 from create_csa_data import create_csa_data
-
- 
+import random
+from kanjize import number2kanji
 # ロギングの設定
 logging.basicConfig(level=logging.DEBUG)
 
@@ -109,6 +109,19 @@ def create_svg(image: Image.Image) -> str:
     logging.debug("SVG data created")
     return svg_data
 
+def create_next_move(image: Image.Image) -> str:
+    #次の一手 ただしランダム
+    image_array = np.array(image)
+    csa_data = create_csa(image_array)
+    board = __parse_csa(csa_data)
+    ran = random.randrange(len(list(board.legal_moves))) # 合法手の数に合わせた乱数を生成
+    lastmove = list(board.legal_moves)[ran] # 指し手を決定
+    mfrom = cshogi.move_from(lastmove)
+    mto = cshogi.move_to(lastmove)
+    next_move= str(mfrom // 9 + 1) + number2kanji(mfrom % 9 + 1) + '→'  + str(mto // 9 + 1) + number2kanji(mto % 9 + 1)
+    print(next_move)
+    return next_move
+
 def __test_main(csa_data):
     # テスト用
     board = __parse_csa(csa_data)
@@ -156,5 +169,5 @@ def __add_hand_pieces(pieces_in_hand, hand_pieces):
 if __name__ == "__main__":
     test_img_path = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/スクリーンショット 2024-06-16 113533.png'
     img_data = cv2.imread(test_img_path)
-    print(create_csa(img_data))
+    print(create_next_move(img_data))
     #print(create_svg(img_data))
