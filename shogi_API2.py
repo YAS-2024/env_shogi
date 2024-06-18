@@ -1,3 +1,4 @@
+#起動　uvicorn shogi_API2--reload
 import os
 import logging
 from fastapi import FastAPI, File, UploadFile, Form

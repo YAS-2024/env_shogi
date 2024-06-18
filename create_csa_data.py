@@ -85,6 +85,8 @@ def _convert_hand_pieces_to_csa(hand_pieces):
             csa_hand_pieces=csa_hand_pieces + csa_row + '\n'
     if len(csa_hand_pieces)>0:
         csa_hand_pieces='+\n' + csa_hand_pieces
+    else:
+        csa_hand_pieces='+\n'
     return csa_hand_pieces
 
 if __name__=="__main__":

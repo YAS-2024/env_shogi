@@ -146,6 +146,7 @@ def __add_hand_pieces(pieces_in_hand, hand_pieces):
     return pieces_in_hand
 
 if __name__ == "__main__":
-    test_img_path = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/-2024-06-10-204745_png.rf.e84dfe7e583aac332bd489ef963b8ffa.jpg'
+    test_img_path = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/スクリーンショット 2024-06-16 113533.png'
     img_data = cv2.imread(test_img_path)
     print(create_csa(img_data))
+    print(create_svg(img_data))

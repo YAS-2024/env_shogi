@@ -1,7 +1,7 @@
 import requests
 import os
- 
-def test_api(endpoint_url, image_path, process_type):
+
+def test_api(endpoint_url, image_path, process_type, output_index):
     # 画像を読み込む
     with open(image_path, 'rb') as image_file:
         image_bytes = image_file.read()
@@ -19,13 +19,13 @@ def test_api(endpoint_url, image_path, process_type):
         response_data = response.json()
         
         if process_type == "csa":
-            output_path = os.path.join("output", "csa_data.txt")
+            output_path = os.path.join("output/API_test", f"csa{output_index}.txt")
             with open(output_path, "w") as file:
                 file.write(response_data["csa_data"])
             print(f"CSA data written to {output_path}")
         
         elif process_type == "svg":
-            output_path = os.path.join("output", "shogi_board.svg")
+            output_path = os.path.join("output/API_test", f"svg{output_index}.svg")
             with open(output_path, "w") as file:
                 file.write(response_data["svg_data"])
             print(f"SVG data written to {output_path}")
@@ -34,15 +34,20 @@ def test_api(endpoint_url, image_path, process_type):
         print(response.text)
 
 if __name__ == "__main__":
-    # テスト用のエンドポイントURLと画像パス
-    
+    # テスト用のエンドポイントURLと画像ディレクトリ
     endpoint_url = "http://localhost:8000/process_shogi_image/"
-    image_path = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/-2024-06-10-204745_png.rf.e84dfe7e583aac332bd489ef963b8ffa.jpg'  # テスト用の画像ファイルパス とりあえずバス
+    image_dir = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/'
 
     # 出力ディレクトリを作成
-    if not os.path.exists("output"):
-        os.makedirs("output")
+    if not os.path.exists("output/API_test"):
+        os.makedirs("output/API_test")
 
-    # CSAとSVGプロセスタイプでテスト
-    for process_type in ["csa", "svg"]:
-        test_api(endpoint_url, image_path, process_type)
+    # ディレクトリ内のすべての画像ファイルを取得
+    image_files = [f for f in os.listdir(image_dir) if f.endswith(('.jpg', '.jpeg', '.png'))]
+
+    # 各画像ファイルを順次処理
+    for idx, image_file in enumerate(image_files, start=1):
+        image_path = os.path.join(image_dir, image_file)
+        
+        for process_type in ["csa", "svg"]:
+            test_api(endpoint_url, image_path, process_type, idx)
