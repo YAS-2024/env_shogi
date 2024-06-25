@@ -20,7 +20,7 @@ best_model_path_pkl = os.getcwd() + '/models/yolo_detct_piece_model/best.pkl'  #
 # 検証用の推論に使用するため　訓練に使用した画像ディレクトリ
 images_dir =  os.getcwd() + '/input/detect_pieces_task'  # 正しいパスに変更
 # 推論結果出力ディレクトリの設定
-output_dir =  os.getcwd() +'/workspaces/env_shogi/output/detect_pieces_task'
+output_dir =  os.getcwd() +'/output/detect_pieces_task'
 
 # クラス名のリスト（yamlファイルに基づく）
 class_names = ['gote', 'sente']

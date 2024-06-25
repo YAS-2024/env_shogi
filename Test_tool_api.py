@@ -44,7 +44,7 @@ def test_api(endpoint_url, image_path, process_type, output_index):
 if __name__ == "__main__":
     # テスト用のエンドポイントURLと画像ディレクトリ
     endpoint_url = "http://localhost:8000/process_shogi_image/"
-    image_dir = '/workspaces/env_shogi/input/detect_shogiban_komadai_task/'
+    image_dir = os.getcwd() + '/input/API_test/'
 
     # 出力ディレクトリを作成
     if not os.path.exists("output/API_test"):
