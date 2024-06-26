@@ -7,7 +7,6 @@ import pickle
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # CUDAを無効にする
 import cv2
-import numpy as np
 from PIL import Image
 from datetime import datetime
 from Pieces_cassificarion import predict_pices_class_from_image_batch

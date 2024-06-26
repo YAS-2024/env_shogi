@@ -9,8 +9,6 @@ torch.backends.cudnn.enabled = False
 import pickle
 import cv2
 from datetime import datetime
-from PIL import Image
-import numpy as np
 
 # データセットのパスを設定
 images_dir = os.getcwd() + '/input/detect_shogiban_komadai_task'

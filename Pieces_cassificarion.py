@@ -4,7 +4,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # CUDAを無効にする
 import torch
 torch.backends.cudnn.enabled = False
 import torch.nn as nn
-from torchvision import models, transforms
+from torchvision import models
 from PIL import Image
 import pickle
 

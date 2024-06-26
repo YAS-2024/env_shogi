@@ -1,5 +1,5 @@
 # 使用するNVIDIAのCUDA Dockerイメージ 
-FROM python:3.10-slim
+FROM python:3.9-slim
 
 # 環境変数の設定
 ENV DEBIAN_FRONTEND=noninteractive

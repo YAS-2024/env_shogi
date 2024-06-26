@@ -1,3 +1,0 @@
-・環境書き出し　
-　pip freeze > requirements.txt
-

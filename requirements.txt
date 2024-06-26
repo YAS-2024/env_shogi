@@ -19,6 +19,7 @@ httpcore==1.0.5
 httptools==0.6.1
 httpx==0.27.0
 idna==3.7
+importlib_resources==6.4.0
 Jinja2==3.1.3
 kanjize==1.5.0
 kiwisolver==1.4.5
@@ -47,7 +48,7 @@ pytz==2024.1
 PyYAML==6.0.1
 requests==2.32.3
 rich==13.7.1
-scipy==1.14.0
+scipy==1.13.1
 seaborn==0.13.2
 shellingham==1.5.4
 six==1.16.0
@@ -62,10 +63,11 @@ typer==0.12.3
 typing_extensions==4.9.0
 tzdata==2024.1
 ujson==5.10.0
-ultralytics==8.2.42
+ultralytics==8.2.44
 ultralytics-thop==2.0.0
 urllib3==2.2.2
 uvicorn==0.30.1
 uvloop==0.19.0
 watchfiles==0.22.0
 websockets==12.0
+zipp==3.19.2
